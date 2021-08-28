@@ -3,6 +3,8 @@ package com.wxf.interview;
 
 import org.junit.Test;
 
+import java.util.Scanner;
+
 public class InterviewTest {
 
     @Test
@@ -27,6 +29,11 @@ public class InterviewTest {
 
         Integer[] nums = new Integer[10];
         System.out.println(nums);
+
+    }
+
+    @Test
+    public void test2() {
 
     }
 }

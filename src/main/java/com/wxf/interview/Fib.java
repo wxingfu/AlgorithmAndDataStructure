@@ -3,7 +3,7 @@ package com.wxf.interview;
 public class Fib {
 
     public static void main(String[] args) {
-        int fib = fib(4);
+        int fib = fib(31);
         System.out.println(fib);
     }
 
