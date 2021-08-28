@@ -15,15 +15,18 @@ public class InterviewTest {
         // System.out.println(s.length() % 8);
         // System.out.println(s.substring(0, 8));
 
-        int m = 3;
-        int n = 2;
-        int[][] f = new int[m][n];
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                System.out.println(f[i][j]);
-            }
-        }
+        // int m = 3;
+        // int n = 2;
+        // int[][] f = new int[m][n];
+        // for (int i = 0; i < m; i++) {
+        //     for (int j = 0; j < n; j++) {
+        //         System.out.println(f[i][j]);
+        //     }
+        // }
 
+
+        Integer[] nums = new Integer[10];
+        System.out.println(nums);
 
     }
 }
