@@ -1,4 +1,4 @@
-package com.wxf.interview;
+package com.wxf.nowcoder;
 
 import java.util.Scanner;
 

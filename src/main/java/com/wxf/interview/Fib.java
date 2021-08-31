@@ -3,8 +3,10 @@ package com.wxf.interview;
 public class Fib {
 
     public static void main(String[] args) {
-        int fib = fib(31);
-        System.out.println(fib);
+        // int fib = fib(31);
+        // System.out.println(fib);
+        int i = fib3(10);
+        System.out.println(i);
     }
 
     /**
@@ -45,5 +47,13 @@ public class Fib {
             b = sum;
         }
         return a;
+    }
+
+    public static int fib3(int n) {
+        if (n == 0 || n == 1) {
+            return n;
+        } else {
+            return fib(n - 1) + fib(n - 2);
+        }
     }
 }
