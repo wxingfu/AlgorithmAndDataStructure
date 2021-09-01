@@ -1,6 +1,8 @@
 package com.wxf.leetcode;
 
 
+import com.wxf.common.ListNode;
+
 public class MergeTwoLists {
     public static void main(String[] args) {
         // ListNode listNode = mergeTwoLists();
@@ -36,22 +38,5 @@ public class MergeTwoLists {
         // 合并后 l1 和 l2 最多只有一个还未被合并完，我们直接将链表末尾指向未合并完的链表即可
         prev.next = l1 == null ? l2 : l1;
         return prehead.next;
-    }
-}
-
-class ListNode {
-    int val;
-    ListNode next;
-
-    ListNode() {
-    }
-
-    ListNode(int val) {
-        this.val = val;
-    }
-
-    ListNode(int val, ListNode next) {
-        this.val = val;
-        this.next = next;
     }
 }
