@@ -1,6 +1,7 @@
 package com.wxf;
 
-import com.wxf.leetcode.MinStack;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MyTest {
 
@@ -24,13 +25,17 @@ public class MyTest {
 
         // System.out.println(1 <= 2);
 
-        MinStack minStack = new MinStack();
+        /*MinStack minStack = new MinStack();
         minStack.push(-2);
         minStack.push(0);
         minStack.push(-3);
         System.out.println(minStack.min());
         minStack.pop();
         System.out.println(minStack.top());
-        System.out.println(minStack.min());
+        System.out.println(minStack.min());*/
+
+        Map<Character, Integer> frequency = new HashMap<Character, Integer>();
+        Integer integer = frequency.get('a');
+        System.out.println(integer);
     }
 }
