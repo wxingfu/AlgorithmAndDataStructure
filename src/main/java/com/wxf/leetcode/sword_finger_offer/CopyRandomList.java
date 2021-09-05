@@ -1,4 +1,4 @@
-package com.wxf.leetcode;
+package com.wxf.leetcode.sword_finger_offer;
 
 import com.wxf.common.Node;
 
