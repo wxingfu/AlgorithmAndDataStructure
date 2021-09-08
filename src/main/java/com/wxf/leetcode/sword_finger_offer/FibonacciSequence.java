@@ -1,4 +1,4 @@
-package com.wxf.leetcode;
+package com.wxf.leetcode.sword_finger_offer;
 
 /**
  * 写一个函数，输入 n ，求斐波那契（Fibonacci）数列的第 n 项。斐波那契数列的定义如下：

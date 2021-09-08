@@ -1,7 +1,7 @@
 package com.wxf;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MyTest {
 
@@ -34,8 +34,16 @@ public class MyTest {
         System.out.println(minStack.top());
         System.out.println(minStack.min());*/
 
-        Map<Character, Integer> frequency = new HashMap<Character, Integer>();
+       /* Map<Character, Integer> frequency = new HashMap<Character, Integer>();
         Integer integer = frequency.get('a');
-        System.out.println(integer);
+        System.out.println(integer);*/
+
+        List<Integer>[] graph = new ArrayList[100];
+        for (int i = 0; i < 100; i++) {
+            graph[i].add(i);
+        }
+
+        // List<Integer[]> graph2 = new ArrayList<>();
+        // graph2.add(new Integer[]{1,2});
     }
 }
