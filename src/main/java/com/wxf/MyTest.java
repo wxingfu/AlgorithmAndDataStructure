@@ -1,8 +1,5 @@
 package com.wxf;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class MyTest {
 
     public static void main(String[] args) {
@@ -38,12 +35,12 @@ public class MyTest {
         Integer integer = frequency.get('a');
         System.out.println(integer);*/
 
-        List<Integer>[] graph = new ArrayList[100];
+        /*List<Integer>[] graph = new ArrayList[100];
         for (int i = 0; i < 100; i++) {
             graph[i].add(i);
         }
 
         // List<Integer[]> graph2 = new ArrayList<>();
-        // graph2.add(new Integer[]{1,2});
+        // graph2.add(new Integer[]{1,2});*/
     }
 }
