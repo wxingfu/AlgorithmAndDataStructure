@@ -1,5 +1,8 @@
 package com.wxf;
 
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+
 public class MyTest {
 
     public static void main(String[] args) {
@@ -42,5 +45,10 @@ public class MyTest {
 
         // List<Integer[]> graph2 = new ArrayList<>();
         // graph2.add(new Integer[]{1,2});*/
+
+        CloseableHttpClient aDefault = HttpClients.createDefault();
+        System.out.println(aDefault);
+        CloseableHttpClient system = HttpClients.createSystem();
+        System.out.println(system);
     }
 }
