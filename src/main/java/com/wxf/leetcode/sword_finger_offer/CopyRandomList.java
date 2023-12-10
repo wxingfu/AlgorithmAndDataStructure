@@ -8,11 +8,11 @@ import java.util.Map;
 public class CopyRandomList {
 
 
+    Map<Node, Node> cachedNode = new HashMap<Node, Node>();
+
     public static void main(String[] args) {
 
     }
-
-    Map<Node, Node> cachedNode = new HashMap<Node, Node>();
 
     public Node copyRandomList(Node head) {
         if (head == null) {

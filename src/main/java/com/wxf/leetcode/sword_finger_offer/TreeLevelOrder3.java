@@ -12,16 +12,16 @@ import java.util.Queue;
  * <p>
  * 例如:
  * 给定二叉树:[3,9,20,null,null,15,7],
- *    3
- *   / \
- *  9  20
- *    /  \
- *   15   7
+ * 3
+ * / \
+ * 9  20
+ * /  \
+ * 15   7
  * 返回其层次遍历结果：
  * [
- *    [3],
- *    [20,9],
- *    [15,7]
+ * [3],
+ * [20,9],
+ * [15,7]
  * ]
  *
  * <p>
@@ -49,7 +49,7 @@ public class TreeLevelOrder3 {
 
     /**
      * 利用双端队列LinkedList实现存储顺序
-     *
+     * <p>
      * 偶数层头插法
      * 奇数层尾插法
      *
@@ -60,29 +60,28 @@ public class TreeLevelOrder3 {
         Queue<TreeNode> queue = new LinkedList<>();
         List<List<Integer>> result = new ArrayList<>();
 
-        if(root != null){
+        if (root != null) {
             queue.add(root);
         }
 
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
 
             LinkedList<Integer> linkedList = new LinkedList<>();
 
-            for(int i = queue.size(); i > 0; i--) {
+            for (int i = queue.size(); i > 0; i--) {
 
                 TreeNode node = queue.poll();
 
-                if(result.size() % 2 == 0) {
+                if (result.size() % 2 == 0) {
                     linkedList.addLast(node.val); // 偶数层 -> 队列头部
-                }
-                else {
+                } else {
                     linkedList.addFirst(node.val); // 奇数层 -> 队列尾部
                 }
 
-                if(node.left != null) {
+                if (node.left != null) {
                     queue.add(node.left);
                 }
-                if(node.right != null){
+                if (node.right != null) {
                     queue.add(node.right);
                 }
             }

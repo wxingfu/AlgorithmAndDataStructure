@@ -9,17 +9,6 @@ import java.util.Scanner;
  */
 public class OD0002 {
 
-    // 节点定义
-    public static class ListNode {
-        public int value;
-        public int next;
-
-        public ListNode(int value, int next) {
-            this.value = value;
-            this.next = next;
-        }
-    }
-
     public static void main(String[] args) {
         // 处理输入
         Scanner in = new Scanner(System.in);
@@ -56,6 +45,17 @@ public class OD0002 {
             }
             head = node_info.get(head.next);
             cur++;
+        }
+    }
+
+    // 节点定义
+    public static class ListNode {
+        public int value;
+        public int next;
+
+        public ListNode(int value, int next) {
+            this.value = value;
+            this.next = next;
         }
     }
 

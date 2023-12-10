@@ -14,7 +14,7 @@ public class OD0005 {
     public static void main(String[] args) {
         // 处理输入
         Scanner in = new Scanner(System.in);
-        //转为数组
+        // 转为数组
         List<Integer> height = Arrays.stream(in.nextLine().split(" "))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());

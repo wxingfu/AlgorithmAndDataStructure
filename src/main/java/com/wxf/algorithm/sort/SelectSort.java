@@ -12,7 +12,7 @@ public class SelectSort {
     public static void main(String[] args) {
         int[] arr = new int[10];
         for (int i = 0; i < 10; i++) {
-            arr[i] = (int) (Math.random() * 100); //生成一个[0, 100) 数
+            arr[i] = (int) (Math.random() * 100); // 生成一个[0, 100) 数
         }
         System.out.println("原数组：" + Arrays.toString(arr));
         selectSort(arr);
@@ -21,8 +21,9 @@ public class SelectSort {
 
     /**
      * 基本思想：第一趟将序列中值最小的元素与第一位元素位置交换
-     *          第二趟剩余元素序列重复第一趟操作
-     *          第三趟剩余元素序列重复第一趟操作
+     * 第二趟剩余元素序列重复第一趟操作
+     * 第三趟剩余元素序列重复第一趟操作
+     *
      * @param arr
      */
     public static void selectSort(int[] arr) {

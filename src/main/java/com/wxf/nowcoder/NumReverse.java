@@ -25,7 +25,7 @@ public class NumReverse {
             for (int i = chars.length - 1; i >= 0; i--) {
                 sb.append(chars[i]);
             }
-            System.out.println(sb.toString());
+            System.out.println(sb);
         }
     }
 }

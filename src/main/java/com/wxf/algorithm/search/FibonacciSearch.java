@@ -24,13 +24,13 @@ import java.util.Arrays;
  */
 public class FibonacciSearch {
 
+    public static int maxSize = 20;
+
     public static void main(String[] args) {
         int[] arr = {1, 8, 10, 89, 1000, 1234};
         // System.out.println("index=" + fibSearch(arr, 1));
         System.out.println("index=" + fibonacciSearch(arr, 1));
     }
-
-    public static int maxSize = 20;
 
     public static int fibSearch(int[] arr, int key) {
         int low = 0;
@@ -114,10 +114,10 @@ public class FibonacciSearch {
                 midvalue = array[length - 1];
             else
                 midvalue = array[middle];
-            if (midvalue > key) {//要查找的值在前半部分
+            if (midvalue > key) {// 要查找的值在前半部分
                 hight = middle - 1;
                 k = k - 1;
-            } else if (midvalue < key) {//要查找的值在后半部分
+            } else if (midvalue < key) {// 要查找的值在后半部分
                 low = middle + 1;
                 k = k - 2;
             } else {

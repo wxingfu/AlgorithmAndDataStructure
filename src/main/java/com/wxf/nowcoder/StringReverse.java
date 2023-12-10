@@ -9,7 +9,7 @@ public class StringReverse {
         while (sc.hasNext()) {
             String s = sc.nextLine();
             StringBuilder str = new StringBuilder(s).reverse();
-            System.out.println(str.toString());
+            System.out.println(str);
         }
     }
 }

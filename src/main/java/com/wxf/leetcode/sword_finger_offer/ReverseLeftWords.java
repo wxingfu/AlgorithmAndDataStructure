@@ -18,7 +18,7 @@ package com.wxf.leetcode.sword_finger_offer;
 public class ReverseLeftWords {
     public static void main(String[] args) {
         String s = reverseLeftWords("lrloseumgh", 6);
-        //umghlrlose
+        // umghlrlose
         System.out.println(s);
     }
 

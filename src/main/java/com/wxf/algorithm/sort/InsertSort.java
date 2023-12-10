@@ -12,7 +12,7 @@ public class InsertSort {
     public static void main(String[] args) {
         int[] arr = new int[10];
         for (int i = 0; i < 10; i++) {
-            arr[i] = (int) (Math.random() * 100); //生成一个[0, 100) 数
+            arr[i] = (int) (Math.random() * 100); // 生成一个[0, 100) 数
         }
         System.out.println("原数组：" + Arrays.toString(arr));
         insertSort(arr);
@@ -25,15 +25,16 @@ public class InsertSort {
      * 排序过程中每次从无序表中取出第一个元素，
      * 把它的排序码依次与有序表元素的排序码进行比较，
      * 将它插入到有序表中的适当位置，使之成为新的有序表。
+     *
      * @param arr
      */
-    public static void insertSort(int[] arr){
+    public static void insertSort(int[] arr) {
 
         int insertVal = 0;
         int insertIndex = 0;
-        //使用for循环来把代码简化
-        for(int i = 1; i < arr.length; i++) {
-            //定义待插入的数
+        // 使用for循环来把代码简化
+        for (int i = 1; i < arr.length; i++) {
+            // 定义待插入的数
             insertVal = arr[i];
             insertIndex = i - 1; // 即arr[1]的前面这个数的下标
             // 给insertVal 找到插入的位置
@@ -46,7 +47,7 @@ public class InsertSort {
                 insertIndex--;
             }
             // 当退出while循环时，说明插入的位置找到, insertIndex + 1
-            if(insertIndex + 1 != i) {
+            if (insertIndex + 1 != i) {
                 arr[insertIndex + 1] = insertVal;
             }
 

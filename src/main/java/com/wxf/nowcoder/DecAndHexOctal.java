@@ -16,7 +16,7 @@ public class DecAndHexOctal {
         map.put("F", 15);
         Scanner in = new Scanner(System.in);
         String a = in.nextLine();
-        a = a.substring(2, a.length());
+        a = a.substring(2);
         int b = a.length();
         double res = 0.0;
         int i = 0;

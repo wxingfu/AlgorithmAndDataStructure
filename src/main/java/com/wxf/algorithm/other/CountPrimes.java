@@ -11,15 +11,15 @@ public class CountPrimes {
     }
 
     public static int countPrimes(int n) {
-        //标记合数
+        // 标记合数
         boolean[] composite = new boolean[n];
-        int count = 0;//统计质数的个数
+        int count = 0;// 统计质数的个数
         for (int i = 2; i < n; i++) {
-            //如果是合数就不需要统计
+            // 如果是合数就不需要统计
             if (composite[i])
                 continue;
             count++;
-            //到这一步说明是质数，直接让他的2倍，
+            // 到这一步说明是质数，直接让他的2倍，
             // 3倍……都标记为合数
             for (int j = i; j < n; j += i)
                 composite[j] = true;

@@ -11,7 +11,7 @@ public class ShellSort {
     public static void main(String[] args) {
         int[] arr = new int[10];
         for (int i = 0; i < 10; i++) {
-            arr[i] = (int) (Math.random() * 100); //生成一个[0, 100) 数
+            arr[i] = (int) (Math.random() * 100); // 生成一个[0, 100) 数
         }
         System.out.println("原数组：" + Arrays.toString(arr));
         shellSort(arr);
@@ -59,11 +59,11 @@ public class ShellSort {
                 int temp = arr[j];
                 if (arr[j] < arr[j - gap]) {
                     while (j - gap >= 0 && temp < arr[j - gap]) {
-                        //移动
+                        // 移动
                         arr[j] = arr[j - gap];
                         j -= gap;
                     }
-                    //当退出while后，就给temp找到插入的位置
+                    // 当退出while后，就给temp找到插入的位置
                     arr[j] = temp;
                 }
             }

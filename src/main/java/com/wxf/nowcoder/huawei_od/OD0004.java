@@ -1,6 +1,10 @@
 package com.wxf.nowcoder.huawei_od;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * 区间连接器
@@ -17,19 +21,19 @@ public class OD0004 {
                 .replaceAll("]", "")
                 .split(",");
 
-        List<int[]> regions = new ArrayList<>();    //区间集合
+        List<int[]> regions = new ArrayList<>();    // 区间集合
         for (int i = 0; i < regionsStr.length; i += 2) {
             int left = Integer.parseInt(regionsStr[i]);
             int right = Integer.parseInt(regionsStr[i + 1]);
             regions.add(new int[]{left, right});
         }
 
-        List<Integer> links = new ArrayList<>();    //连接器集合
+        List<Integer> links = new ArrayList<>();    // 连接器集合
         for (String s : linksStr) {
             links.add(Integer.valueOf(s));
         }
 
-        regions.sort((a, b) -> {    //区间进行升序排序
+        regions.sort((a, b) -> {    // 区间进行升序排序
             if (b[0] == a[0]) {
                 return a[1] - b[1];
             }
@@ -52,7 +56,7 @@ public class OD0004 {
             }
         }
 
-        List<Integer> gaps = new ArrayList<>();     //各区间所需连接器的长度集合
+        List<Integer> gaps = new ArrayList<>();     // 各区间所需连接器的长度集合
         iter = regions.iterator();
         region = null;
         while (iter.hasNext()) {
@@ -70,16 +74,16 @@ public class OD0004 {
         int i = 0; // gaps index
         int j = 0; // links index
         while (i < gaps.size() && j < links.size()) {
-            if (links.get(j) >= gaps.get(i)) {   //连接器长度大于等于所需连接器长度，符合要求
-                gaps.set(i, 0);     //可以连接的两个区间距离设置为0
+            if (links.get(j) >= gaps.get(i)) {   // 连接器长度大于等于所需连接器长度，符合要求
+                gaps.set(i, 0);     // 可以连接的两个区间距离设置为0
                 i++;
             }
-            j++;    //使用过的连接器不再使用
+            j++;    // 使用过的连接器不再使用
         }
 
         int noneZoreNum = 0;
         for (int g : gaps) {
-            if (g > 0) {     //大于0，说明两个区间无法进行连接
+            if (g > 0) {     // 大于0，说明两个区间无法进行连接
                 noneZoreNum++;
             }
         }
