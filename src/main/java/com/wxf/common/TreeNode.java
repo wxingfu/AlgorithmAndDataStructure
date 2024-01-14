@@ -2,11 +2,19 @@ package com.wxf.common;
 
 public class TreeNode {
 
-    public int val;
+    //  节点值
+    public int value;
+
+    //  左节点指针
     public TreeNode left;
+
+    // 右节点指针
     public TreeNode right;
 
-    public TreeNode(int x) {
-        val = x;
+
+    public TreeNode(int value) {
+        this.value = value;
+        this.left = null;
+        this.right = null;
     }
 }

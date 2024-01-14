@@ -73,9 +73,9 @@ public class TreeLevelOrder3 {
                 TreeNode node = queue.poll();
 
                 if (result.size() % 2 == 0) {
-                    linkedList.addLast(node.val); // 偶数层 -> 队列头部
+                    linkedList.addLast(node.value); // 偶数层 -> 队列头部
                 } else {
-                    linkedList.addFirst(node.val); // 奇数层 -> 队列尾部
+                    linkedList.addFirst(node.value); // 奇数层 -> 队列尾部
                 }
 
                 if (node.left != null) {

@@ -49,7 +49,7 @@ public class TreeLevelOrder {
         while (!queue.isEmpty()) {
             curr = queue.poll();
 
-            list.add(curr.val);
+            list.add(curr.value);
 
             if (curr.left != null) {
                 queue.offer(curr.left);

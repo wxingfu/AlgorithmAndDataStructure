@@ -35,7 +35,7 @@ public class ReversePrintList {
 
         int i = length - 1;
         while (head != null) {
-            arr[i] = head.val;
+            arr[i] = head.value;
             head = head.next;
             i--;
         }
