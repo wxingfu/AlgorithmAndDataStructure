@@ -51,7 +51,7 @@ public class TreeLevelOrder2 {
             List<Integer> tempList = new ArrayList<>();
             for (int i = queue.size(); i > 0; i--) {
                 node = queue.poll();
-                tempList.add(node.value);
+                tempList.add(node.val);
                 if (node.left != null) {
                     queue.offer(node.left);
                 }

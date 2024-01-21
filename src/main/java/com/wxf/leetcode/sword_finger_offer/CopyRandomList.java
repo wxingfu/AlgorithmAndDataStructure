@@ -19,7 +19,7 @@ public class CopyRandomList {
             return null;
         }
         if (!cachedNode.containsKey(head)) {
-            Node headNew = new Node(head.value);
+            Node headNew = new Node(head.val);
             cachedNode.put(head, headNew);
             headNew.next = copyRandomList(head.next);
             headNew.random = copyRandomList(head.random);

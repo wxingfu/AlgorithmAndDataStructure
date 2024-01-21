@@ -3,7 +3,7 @@ package com.wxf.common;
 public class ListNode {
 
     //  节点值
-    public int value;
+    public int val;
 
     //  下一节点的指针
     public ListNode next;
@@ -11,8 +11,8 @@ public class ListNode {
     public ListNode() {
     }
 
-    public ListNode(int value) {
-        this.value = value;
+    public ListNode(int val) {
+        this.val = val;
         this.next = null;
     }
 }

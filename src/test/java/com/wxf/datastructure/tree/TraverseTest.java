@@ -48,7 +48,7 @@ public class TraverseTest {
             return;
         }
 
-        System.out.printf("节点 %s 在第 %d 层 \n", root.value, level);
+        System.out.printf("节点 %s 在第 %d 层 \n", root.val, level);
         traverse(root.left, level + 1);
         traverse(root.right, level + 1);
     }
@@ -62,7 +62,7 @@ public class TraverseTest {
         int leftCount = count(root.left);
         int rightCount = count(root.right);
 
-        System.out.printf("节点 %s 的左子树有 %d 个节点，右子树有 %d 个节点 \n", root.value, leftCount, rightCount);
+        System.out.printf("节点 %s 的左子树有 %d 个节点，右子树有 %d 个节点 \n", root.val, leftCount, rightCount);
 
         return leftCount + rightCount + 1;
     }
@@ -102,7 +102,7 @@ public class TraverseTest {
             for (int i = 0; i < sz; i++) {
                 TreeNode curr = q.poll();
                 if (curr != null) {
-                    System.out.print(curr.value + " ");
+                    System.out.print(curr.val + " ");
                     if (curr.left != null) {
                         q.offer(curr.left);
                     }

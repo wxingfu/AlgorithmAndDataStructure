@@ -3,7 +3,7 @@ package com.wxf.common;
 public class TreeNode {
 
     //  节点值
-    public int value;
+    public int val;
 
     //  左节点指针
     public TreeNode left;
@@ -12,8 +12,8 @@ public class TreeNode {
     public TreeNode right;
 
 
-    public TreeNode(int value) {
-        this.value = value;
+    public TreeNode(int val) {
+        this.val = val;
         this.left = null;
         this.right = null;
     }

@@ -13,7 +13,7 @@ public class MergeTwoLists {
             return l2;
         } else if (l2 == null) {
             return l1;
-        } else if (l1.value < l2.value) {
+        } else if (l1.val < l2.val) {
             l1.next = mergeTwoLists(l1.next, l2);
             return l1;
         } else {
@@ -26,7 +26,7 @@ public class MergeTwoLists {
         ListNode prehead = new ListNode(-1);
         ListNode prev = prehead;
         while (l1 != null && l2 != null) {
-            if (l1.value <= l2.value) {
+            if (l1.val <= l2.val) {
                 prev.next = l1;
                 l1 = l1.next;
             } else {

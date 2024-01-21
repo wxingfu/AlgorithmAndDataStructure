@@ -45,7 +45,7 @@ public class IsSymmetric {
             return true;
         }
         // 结束条件2：如果单独一个节点为空，另一个节点不为空，又或者是对称节点间的val值不等，则返回false
-        if (A == null || B == null || A.value != B.value) {
+        if (A == null || B == null || A.val != B.val) {
             return false;
         }
         // 该层符合对称二叉树的要求，开始比较下一层

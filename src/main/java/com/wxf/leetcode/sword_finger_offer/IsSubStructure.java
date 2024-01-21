@@ -43,7 +43,7 @@ public class IsSubStructure {
         if (B == null || A == null) {
             return false;
         }
-        if (A.value == B.value && (recurse(A.left, B.left) && recurse(A.right, B.right))) {
+        if (A.val == B.val && (recurse(A.left, B.left) && recurse(A.right, B.right))) {
             return true;
         }
         return isSubStructure(A.left, B) || isSubStructure(A.right, B);
@@ -56,7 +56,7 @@ public class IsSubStructure {
         if (A == null) {
             return false;
         }
-        if (A.value == B.value) {
+        if (A.val == B.val) {
             return recurse(A.left, B.left) && recurse(A.right, B.right);
         } else {
             return false;
