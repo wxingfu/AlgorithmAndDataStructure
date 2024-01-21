@@ -116,4 +116,29 @@ public class TraverseTest {
 
 
     }
+
+
+    @Test
+    public void test1() {
+        TreeNode root = new TreeNode(3);
+        TreeNode root1 = new TreeNode(9);
+        TreeNode root2 = new TreeNode(20);
+        TreeNode root3 = new TreeNode(15);
+        TreeNode root4 = new TreeNode(7);
+
+        root.left = root1;
+        root.right = root2;
+
+        root2.left = root3;
+        root2.right = root4;
+
+        int minDepth = minDepth(root);
+        System.out.println(minDepth);
+
+    }
+
+    int minDepth(TreeNode root) {
+        return 0;
+    }
+
 }

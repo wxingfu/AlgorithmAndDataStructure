@@ -3,6 +3,8 @@ package com.wxf.datastructure.list;
 import com.wxf.node.ListNode;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.PriorityQueue;
 
 public class ListTest {
@@ -312,17 +314,17 @@ public class ListTest {
 
     }
 
-    public ListNode getIntersectionNode(ListNode head1, ListNode head2) {
-        if (head1 == null || head2 == null) {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if (headA == null || headB == null) {
             return null;
         }
-        ListNode p1 = head1, p2 = head2;
+        ListNode p1 = headA, p2 = headB;
         while (p1 != p2) {
             // if (p1 != null && p2 != null && p1.value == p2.value) {
             //     break;
             // }
-            p1 = p1 == null ? head2 : p1.next;
-            p2 = p2 == null ? head1 : p2.next;
+            p1 = p1 == null ? headB : p1.next;
+            p2 = p2 == null ? headA : p2.next;
         }
 
         return p1;
@@ -331,13 +333,41 @@ public class ListTest {
 
     @Test
     public void test8() {
+        // 1,2,3,3,4,4,5
         ListNode l1 = new ListNode(1);
         l1.next = new ListNode(2);
         l1.next.next = new ListNode(3);
-        l1.next.next.next = new ListNode(4);
+        l1.next.next.next = new ListNode(3);
+        l1.next.next.next.next = new ListNode(4);
+        l1.next.next.next.next.next = new ListNode(4);
+        l1.next.next.next.next.next.next = new ListNode(5);
 
+        ListNode listNode = deleteDuplicates(l1);
+        print(listNode);
 
+        List<List<Integer>> res = new ArrayList<>();
     }
 
+
+    public ListNode deleteDuplicates(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+        ListNode dummy = new ListNode(-1, head);
+
+        ListNode cur = dummy;
+        while (cur.next != null && cur.next.next != null) {
+            if (cur.next.val == cur.next.next.val) {
+                int x = cur.next.val;
+                while (cur.next != null && cur.next.val == x) {
+                    cur.next = cur.next.next;
+                }
+            } else {
+                cur = cur.next;
+            }
+        }
+
+        return dummy.next;
+    }
 
 }
