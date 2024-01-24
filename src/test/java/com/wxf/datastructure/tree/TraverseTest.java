@@ -120,25 +120,80 @@ public class TraverseTest {
 
     @Test
     public void test1() {
-        TreeNode root = new TreeNode(3);
-        TreeNode root1 = new TreeNode(9);
-        TreeNode root2 = new TreeNode(20);
-        TreeNode root3 = new TreeNode(15);
-        TreeNode root4 = new TreeNode(7);
+        // TreeNode root = new TreeNode(3);
+        // TreeNode root1 = new TreeNode(9);
+        // TreeNode root2 = new TreeNode(20);
+        // TreeNode root3 = new TreeNode(15);
+        // TreeNode root4 = new TreeNode(7);
+        //
+        // root.left = root1;
+        // root.right = root2;
+        //
+        // root2.left = root3;
+        // root2.right = root4;
 
-        root.left = root1;
-        root.right = root2;
 
-        root2.left = root3;
-        root2.right = root4;
+        // TreeNode root = new TreeNode(2);
+        // TreeNode root1 = new TreeNode(3);
+        // TreeNode root2 = new TreeNode(4);
+        // TreeNode root3 = new TreeNode(5);
+        // TreeNode root4 = new TreeNode(6);
+        //
+        // root.right = root1;
+        // root1.right = root2;
+        // root2.right = root3;
+        // root3.right = root4;
 
-        int minDepth = minDepth(root);
+
+        TreeNode root1 = new TreeNode(1);
+        TreeNode root2 = new TreeNode(2);
+        TreeNode root3 = new TreeNode(3);
+        TreeNode root4 = new TreeNode(4);
+        TreeNode root5 = new TreeNode(5);
+        TreeNode root6 = new TreeNode(6);
+        TreeNode root7 = new TreeNode(7);
+
+        root1.left = root2;
+        root1.right = root3;
+
+        root2.left = root4;
+        root2.right = root5;
+
+        root5.left = root6;
+        root5.right = root7;
+
+        int minDepth = minDepth(root1);
         System.out.println(minDepth);
 
     }
 
     int minDepth(TreeNode root) {
-        return 0;
+        int depth = 0;
+        if (root == null) {
+            return depth;
+        }
+        Queue<TreeNode> q = new LinkedList<>();
+        q.offer(root);
+        depth += 1;
+        while (!q.isEmpty()) {
+            int sz = q.size();
+            for (int i = 0; i < sz; i++) {
+                TreeNode curr = q.poll();
+                if (curr != null) {
+                    if (curr.left == null && curr.right == null) {
+                        return depth;
+                    }
+                    if (curr.left != null) {
+                        q.offer(curr.left);
+                    }
+                    if (curr.right != null) {
+                        q.offer(curr.right);
+                    }
+                }
+            }
+            depth += 1;
+        }
+        return depth;
     }
 
 }
