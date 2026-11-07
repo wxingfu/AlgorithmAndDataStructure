@@ -1,6 +1,28 @@
-.idea
+# IntelliJ IDEA
+.idea/
 *.iml
-out
-gen
+*.ipr
+*.iws
+out/
+gen/
 
-/target/*
+# Eclipse / VS Code
+.classpath
+.project
+.settings/
+.factorypath
+.vscode/
+
+# Maven / 编译产物
+target/
+*.class
+*.log
+
+# 临时文件
+*.tmp
+*.bak
+*~
+
+# 操作系统
+.DS_Store
+Thumbs.db
