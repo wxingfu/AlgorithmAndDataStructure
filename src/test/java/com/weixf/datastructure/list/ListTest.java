@@ -295,18 +295,18 @@ public class ListTest {
     @Test
     public void test7() {
 
+        ListNode common = new ListNode(8);
+        common.next = new ListNode(4);
+        common.next.next = new ListNode(5);
+
         ListNode l1 = new ListNode(4);
         l1.next = new ListNode(1);
-        l1.next.next = new ListNode(8);
-        l1.next.next.next = new ListNode(4);
-        l1.next.next.next.next = new ListNode(5);
+        l1.next.next = common;
 
         ListNode l2 = new ListNode(5);
         l2.next = new ListNode(6);
         l2.next.next = new ListNode(1);
-        l2.next.next.next = new ListNode(8);
-        l2.next.next.next.next = new ListNode(4);
-        l2.next.next.next.next.next = new ListNode(5);
+        l2.next.next.next = common;
 
         ListNode intersectionNode = getIntersectionNode(l1, l2);
 

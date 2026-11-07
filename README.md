@@ -65,14 +65,14 @@
 
 ## 2. 技术栈与工程配置
 
-`pom.xml` 极简，完整内容仅包含坐标、Java 8 编译参数与一个 JUnit 依赖：
+`pom.xml` 保持极简：Maven 坐标、编译参数（Java 8 + UTF-8）与一个 `test` scope 的 JUnit 依赖：
 
 | 配置项 | 当前值 | 说明 / 影响 |
 | --- | --- | --- |
 | `groupId / artifactId / version` | `com.weixf` / `AlgorithmAndDataStructure` / `1.0` | 固定 `jar` 打包，未配置 `maven-jar-plugin` 主类，产物不可直接 `java -jar` 启动 |
 | `maven.compiler.source/target` | `8` | 在 JDK 21 上编译会出现「源值 8 / 目标值 8 已过时」「未设置引导类路径」警告，但可正常编译 |
-| `junit:junit:4.13.2` | **未声明 `<scope>test</scope>`** | 默认 `compile`，JUnit 会进入主 classpath 并可能进入最终依赖树；测试代码可正常编译 |
-| 编码配置 | 未设置 `project.build.sourceEncoding` | Maven 提示「File encoding has not been set, using platform encoding UTF-8」，在 GBK 环境的机器上中文注释可能乱码 |
+| `junit:junit:4.13.2` | 已声明 `<scope>test</scope>`（2026-11-07 修复） | JUnit 仅对测试 classpath 可见，不再进入主 classpath 与最终依赖树 |
+| 编码配置 | `project.build.sourceEncoding = UTF-8`（2026-11-07 修复） | 消除「File encoding has not been set」警告，跨系统中文注释不再乱码 |
 | 插件版本 | 未锁定 | 实际使用 `maven-resources-plugin:3.3.1`、`maven-compiler-plugin:3.11.0`、`maven-surefire-plugin:3.2.2`（由 Maven 默认生命周期绑定决定） |
 | 其他依赖 | 无 | 算法实现只依赖 `java.util.*`（`Arrays`、`Stack`、`Deque`、`Queue`、`HashMap`、`LinkedHashMap`、`PriorityQueue`、`TreeSet` 等），无第三方算法库 |
 
@@ -93,7 +93,7 @@ git clone git@github.com:wxingfu/AlgorithmAndDataStructure.git
 cd AlgorithmAndDataStructure
 
 mvn -B compile     # 只编译主源码，最快，推荐用来验证环境
-mvn -B package     # 编译 + 测试 + 打 jar（注意当前测试有 1 个报错，见 3.4）
+mvn -B package     # 编译 + 测试 + 打 jar（当前测试全绿，见 3.4）
 mvn -B test        # 编译并执行 JUnit 测试
 mvn -B clean test  # 全新构建
 ```
@@ -123,12 +123,12 @@ java -cp target/classes com.weixf.algorithm.search.HashTable      # 交互式菜
 
 | 命令 | 结果 |
 | --- | --- |
-| `mvn -o -B test` | 主源码无需重编、14 个测试源码编译成功；因离线缺少 `surefire-junit4:3.2.2` 而 `BUILD FAILURE` |
-| `mvn -B test`（联网） | 联网下载 provider 后执行 15 个测试：**14 通过、1 报错**，`BUILD FAILURE` |
-| 报错明细 | `ListTest.test7:313 NullPointer Cannot read field "val" because "intersectionNode" is null`——测试用例构造的是两条「值相同但节点不同」的链，`getIntersectionNode` 按引用比较返回 `null`，随后直接取 `.val` 触发 NPE |
+| `mvn -B clean test` | 全量重编 74 个主源码 + 14 个测试源码，执行 **15 个测试：0 失败、0 错误、0 跳过**，`BUILD SUCCESS`；`ListTest.test7` 打印交点值 `8` |
+| `mvn -B package` | 测试全绿后生成 `target/AlgorithmAndDataStructure-1.0.jar`（约 87.6 KB），`BUILD SUCCESS` |
+| 修复前对照 | 修复前 `mvn -B test` 为 14 通过 / 1 报错：`ListTest.test7` 的两条链值相同但节点不同，`getIntersectionNode` 按引用比较返回 `null`，随后取 `.val` 触发 NPE；2026-11-07 已改为共享尾段节点 |
 | `java -cp target/classes ...` | `QuickSort`、`MathBase`、`StringReverse` 等实测可正常运行并打印结果（见 3.3） |
 
-因此：**编译环节是健康的，测试环节当前不是全绿**。若只想验证编译或运行演示，使用 `mvn -B compile` 即可；如需 `mvn package`，需先修复 `test7` 或使用 `-DskipTests`。
+因此：**编译、测试、打包三个环节均已全绿**。当前仅剩 JDK 21 编译 Java 8 目标时的过时警告（不影响结果）；若只想验证环境，`mvn -B compile` 最快。在新机器上首次构建仍需联网下载 Maven 插件与 Surefire 的 JUnit4 Provider。
 
 ### 3.5 用 IDE 打开
 
@@ -342,7 +342,7 @@ AlgorithmAndDataStructure/
 
 | 文件 | `@Test` 数 | 实际内容 |
 | --- | --- | --- |
-| `datastructure/list/ListTest.java` | 9 | 最丰富：合并两个有序链表、优先队列合并 K 个有序链表、找/删倒数第 k 个、找中点、Floyd 判环与找环入口、求链表交点、删除排序链表重复值；全部硬编码构造 + `System.out` 打印，**无任何断言**；`test7` 当前报错（见 3.4） |
+| `datastructure/list/ListTest.java` | 9 | 最丰富：合并两个有序链表、优先队列合并 K 个有序链表、找/删倒数第 k 个、找中点、Floyd 判环与找环入口、求链表交点、删除排序链表重复值；全部硬编码构造 + `System.out` 打印，**无任何断言**；`test7` 已修复为两条真正共享尾段节点的相交链，打印交点值 `8`（见 3.4） |
 | `datastructure/tree/TraverseTest.java` | 2 | 带层号的 DFS 前序、后序统计节点数、最大深度、直径、BFS 层序、BFS 最小深度；打印 `maxDepth` / `diameter` / `minDepth`，无断言 |
 | `datastructure/stack/StackTest.java` | 1 | 空壳，方法体为空 |
 | `datastructure/queue/QueueTest.java` | 1 | 空壳（方法名暗示环形队列，未实现） |
@@ -415,12 +415,14 @@ AlgorithmAndDataStructure/
 
 ### 8.2 工程化现状
 
-| 问题 | 影响 | 建议 |
+2026-11-07 已完成 P0 修复：`ListTest.test7`、JUnit 的 `test` scope、`project.build.sourceEncoding`，并复测 `mvn -B test` / `mvn -B package` 全绿（详见 3.4、8.4）。下表留档已修复项，并列出**当前仍存在**的问题。
+
+| 问题 | 影响 | 状态 / 建议 |
 | --- | --- | --- |
-| `junit` 未声明 `<scope>test</scope>` | JUnit 进入主 classpath / 依赖树 | 补上 `test` scope |
-| 未设置 `project.build.sourceEncoding` | 不同系统编码下中文注释可能乱码，构建提示 platform dependent | 固定 `UTF-8` |
+| ~~`junit` 未声明 `<scope>test</scope>`~~ | 曾使 JUnit 进入主 classpath / 依赖树 | **已修复**：`pom.xml` 补 `<scope>test</scope>` |
+| ~~未设置 `project.build.sourceEncoding`~~ | 曾导致跨系统中文乱码与 platform dependent 警告 | **已修复**：固定 `UTF-8`，编码相关警告已消失 |
+| ~~`mvn -B test` / `mvn -B package` 失败~~ | 原 `ListTest.test7` 两条链未真正相交，返回 `null` 后取 `.val` 触发 NPE | **已修复**：共享尾段节点，15 个测试全绿、jar 正常产出 |
 | 未锁定 Surefire / 编译器插件版本 | 不同 Maven 版本行为不一致；首次离线构建必失败 | 在 `pom.xml` 显式声明插件版本 |
-| `mvn -B test` 当前 `BUILD FAILURE` | 15 个测试中 `ListTest.test7` NPE，`mvn package` 亦会失败 | 修正用例（让两条链真正相交）或加空值判断 |
 | 测试零断言、3 个测试类近乎空壳 | 恒绿但无回归能力，缓存类完全无覆盖 | 为排序/查找/缓存补参数化断言 |
 | 缓存实现放在 `src/test/java` 且无 `@Test`/`main` | 既不打包也不执行，无法直接运行 | 迁到 `src/main/java` 或补测试 |
 | 无 CI、无 LICENSE | 无法自动验证、复用边界不清 | 补 GitHub Actions 与许可文件 |
@@ -452,12 +454,13 @@ AlgorithmAndDataStructure/
 | `leetcode/.../CompareVersion.java`、`MinArray.java`、`FibonacciSequence.java` 等 | 缺边界防护（超 int 修订号、空数组、负数 n） | 特定输入抛异常 |
 | 多个类的 `main` | 10 余个 `main` 为空或演示代码被注释；链表/树类只打印对象地址 | 运行后看不到有效输出 |
 
-### 8.4 建议的改进顺序（供后续迭代，本次未实施）
+### 8.4 改进顺序（P0 已完成，其余供后续迭代）
 
-1. **P0**：修复 `ListTest.test7` 让 `mvn test` 全绿；`junit` 补 `test` scope；补 `sourceEncoding`。
-2. **P1**：修复 8.3 中已确认的越界 / 溢出 / 断链 / 除零问题（`FindRepeatNumber`、`NumWays`、`DoubleList`、`HeapSort`、`BlockSearch`、`InsertValueSearch`）。
-3. **P2**：给排序、查找、LRU/LFU 补带断言的单元测试；统一静态/实例方法签名与节点类型；为 `common` 节点补 `toString`；将缓存实现迁入 `main` 或补测试。
-4. **P3**：引入 CI（自动跑 `mvn -B test`）、补 LICENSE、把「已知问题」逐条关闭后转为正式的算法库说明。
+**P0（2026-11-07 已完成）**：`ListTest.test7` 改为两条真正共享尾段节点的相交链；`pom.xml` 为 JUnit 补 `<scope>test</scope>`；新增 `project.build.sourceEncoding=UTF-8`。复测 `mvn -B clean test`（15/15 通过）与 `mvn -B package`（产出 jar）均为 `BUILD SUCCESS`。
+
+1. **P1**：修复 8.3 中已确认的越界 / 溢出 / 断链 / 除零问题（`FindRepeatNumber`、`NumWays`、`DoubleList`、`HeapSort`、`BlockSearch`、`InsertValueSearch`）。
+2. **P2**：给排序、查找、LRU/LFU 补带断言的单元测试；统一静态/实例方法签名与节点类型；为 `common` 节点补 `toString`；将缓存实现迁入 `main` 或补测试。
+3. **P3**：引入 CI（自动跑 `mvn -B test`）、补 LICENSE、把「已知问题」逐条关闭后转为正式的算法库说明。
 
 ---
 
@@ -490,7 +493,7 @@ git check-ignore -v .idea/workspace.xml target/classes demo.iml
 2. 一个类一个主题；需要复用节点时优先引用 `com.weixf.common`，不要再造一套同名类。
 3. 类注释写明题目原文 / 链接 / 示例；核心方法写清思路与复杂度；保留「自写版 + 优化版」时注明哪个是生效实现。
 4. 提供 `main` 自测或 `@Test` 断言（推荐断言）；带 `Scanner` 的类在注释里写明输入格式与是否支持多组输入。
-5. 提交前执行 `mvn -B compile`（或 `mvn -B test`，需先修复 3.4 的失败用例），并确认 `git status --short` 中没有 `.idea/`、`target/`、`*.iml` 等本地产物。
+5. 提交前执行 `mvn -B test`（当前 15 个测试全绿，见 3.4）或 `mvn -B package`，并确认 `git status --short` 中没有 `.idea/`、`target/`、`*.iml` 等本地产物。
 
 ---
 
